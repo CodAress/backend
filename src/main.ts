@@ -17,7 +17,13 @@ async function bootstrap() {
 
   app.setGlobalPrefix(apiPrefix);
   app.use(helmet());
-  app.enableCors();
+  app.enableCors({
+    origin: true, // Permite todas las orígenes en desarrollo
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
