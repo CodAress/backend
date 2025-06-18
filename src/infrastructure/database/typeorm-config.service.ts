@@ -21,7 +21,14 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       logging: this.configService.get<string>('NODE_ENV') === 'development',
       charset: 'utf8mb4',
       timezone: '+00:00',
-      ssl: this.configService.get<string>('NODE_ENV') === 'production',
+      ssl: {
+      rejectUnauthorized: true,
+      },
+      extra: {
+        ssl: {
+          rejectUnauthorized: true,
+        }
+      }
     };
   }
 }
